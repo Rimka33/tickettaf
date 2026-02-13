@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketaf - Transport VTC, Bus et Colis en une seule app</title>
+    <!-- favicons Icons -->
+    <link rel="icon" type="image/png" href="assets/images/logo-ticketaf.png">
+    <meta name="description"
+        content="Ticketaf : une seule application pour vos trajets en VTC, bus interurbains et envoi de colis. Rapide, sûr, et fiable.">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/vendors/animate/animate.min.css">
+    <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/vendors/cityride-icons/style.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="assets/css/cityride.css">
+
+    <style>
+        /* Premium 3D & Animations for Ticketaf */
+        :root {
+            --premium-gradient: linear-gradient(135deg, #FED100 0%, #ffbb00 100%);
+            --premium-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --ticketaf-yellow: #FED100;
+        }
+
+        /* Menu Underline Animation */
+        .main-menu__list li a {
+            position: relative;
+        }
+
+        .main-menu__list li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ticketaf-yellow);
+            transition: width 0.3s ease;
+        }
+
+        .main-menu__list li a:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Animation for Hero Car */
+        @keyframes floating {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(1deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .main-slider-one__image img {
+            animation: floating 4s ease-in-out infinite;
+            filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.3));
+        }
+
+        /* 3D Tilt Effect for Service Cards */
+        .service-card {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 30px 60px rgba(254, 209, 0, 0.2);
+        }
+
+        .service-card__image {
+            overflow: hidden;
+        }
+
+        .service-card__image img {
+            transition: transform 0.8s ease;
+        }
+
+        .service-card:hover .service-card__image img {
+            transform: scale(1.1);
+        }
+
+        /* Glassmorphism for Topbar */
+        .topbar {
+            background: #141414 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 0;
+            font-size: 13px;
+        }
+
+        .topbar__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar__info {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 0;
+        }
+
+        .topbar__info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .topbar__info__icon {
+            color: #FED100;
+            font-size: 14px;
+        }
+
+        .topbar__social {
+            display: flex;
+            gap: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding-right: 20px;
+            margin-right: 20px;
+        }
+
+        .topbar__social a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .topbar__social a:hover {
+            color: #FED100;
+        }
+
+        .topbar__right {
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar__language {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .topbar__language i {
+            color: #FED100;
+        }
+
+        /* Premium Hero Enhancements */
+        .main-slider-one__item {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .main-slider-one__bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        /* Parallax effect on scroll for bg shapes */
+        .parallax-shape {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Glassmorphism Content Box */
+        .hero-glass-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        /* Animated Glowing Orbs */
+        .glow-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(254, 209, 0, 0.15) 0%, transparent 70%);
+            z-index: 1;
+            filter: blur(40px);
+            animation: orbFloat 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat {
+            from {
+                transform: translate(-10%, -10%) scale(1);
+            }
+
+            to {
+                transform: translate(20%, 30%) scale(1.2);
+            }
+        }
+
+        /* Geometric Shapes */
+        .shape-square {
+            position: absolute;
+            border: 2px solid rgba(254, 209, 0, 0.1);
+            width: 100px;
+            height: 100px;
+            right: 15%;
+            top: 10%;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Title Animation */
+        .main-slider-one__title {
+            font-weight: 800;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-slider-one__title span {
+            color: #FED100;
+            display: block;
+            font-size: 1.2em;
+        }
+
+        /* Adjust Main Header to fit below Topbar */
+        .main-header {
+            top: 0;
+        }
+
+        /* Animated Buttons */
+        .cityride-btn--secondary {
+            background: var(--premium-gradient) !important;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cityride-btn--secondary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(254, 209, 0, 0.4);
+        }
+
+        /* Premium Badge */
+        .sec-title__tagline {
+            background: #141414;
+            color: #FED100 !important;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        /* Smooth Reveal Sections */
+        .section-space {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        /* 3D App Mockup & Vision Image */
+        .mobile-app-section img,
+        .premium-tilt {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .mobile-app-section:hover img,
+        .premium-tilt:hover {
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg) scale(1.02);
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Steps Section styles */
+        .step-card {
+            text-align: center;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card__icon {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            background: var(--ticketaf-yellow);
+            color: #141414;
+            border-radius: 50%;
+            font-size: 30px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(254, 209, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover .step-card__icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Stats Section */
+        .stats-one {
+            background: #141414;
+            color: #fff;
+            padding: 60px 0;
+        }
+
+        .stat-box h2 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--ticketaf-yellow);
+            margin-bottom: 5px;
+        }
+
+        /* Comparison Table Style */
+        .comparison-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .comparison-card--dark {
+            background: #141414;
+            color: #fff;
+        }
+
+        /* Service Bullets */
+        .service-card__bullets {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .service-card__bullets li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card__bullets li i {
+            color: var(--ticketaf-yellow);
+            font-size: 10px;
+        }
+
+        .service-card__cta {
+            color: var(--ticketaf-yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-card:hover .service-card__cta {
+            gap: 10px;
+        }
+
+        /* Partner Section */
+        .partner-section {
+            background: #101010;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+    <div class="preloader">
+        <div class="preloader__image"
+            style="background-image: url(assets/images/logo-ticketaf.png); background-size: contain;"></div>
+    </div>
+    <!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar">
+            <div class="container-fluid">
+                <div class="topbar__inner">
+                    <div class="topbar__left">
+                        <ul class="list-unstyled topbar__info">
+                            <li>
+                                <span class="topbar__info__icon"><i class="icon-email"></i></span>
+                                <a href="mailto:support@ticketaf.com">support@ticketaf.com</a>
+                            </li>
+                            <li>
+                                <span class="topbar__info__icon"><i class="icon-maps-and-flags"></i></span>
+                                <span>Dakar & Partout au Sénégal</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="topbar__right">
+                        <div class="topbar__social">
+                            <a href="https://wa.me/221781550404"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="topbar__language">
+                            <i class="fas fa-globe"></i>
+                            <span>Français</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.topbar -->
+
+        <header class="main-header sticky-header sticky-header--normal">
+            <div class="container-fluid">
+                <div class="main-header__inner">
+                    <div class="main-header__logo logo-retina">
+                        <a href="#home"><img src="assets/images/logo-ticketaf.png" alt="Ticketaf" width="150"></a>
+                    </div><!-- /.main-header__logo -->
+                    <div class="main-header__right">
+                        <nav class="main-header__nav main-menu">
+                            <ul class="main-menu__list">
+                                <li><a href="#home">Accueil</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#about">Notre Vision</a></li>
+                                <li><a href="#app">Télécharger</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </nav><!-- /.main-header__nav -->
+                        <div class="mobile-nav__btn mobile-nav__toggler">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- /.mobile-nav__toggler -->
+
+                        <div class="main-header__right__inner">
+                            <div class="main-header__call">
+                                <span class="main-header__call__icon">
+                                    <i class="icon-telephone-call"></i>
+                                </span>
+                                <div class="main-header__call__content">
+                                    <a href="tel:+221781550404" class="main-header__call__number">+221 78 155 04 04</a>
+                                </div>
+                            </div>
+                            <div class="main-header__btn-box">
+                                <a href="#app" class="main-header__btn cityride-btn cityride-btn--secondary">
+                                    <span class="cityride-btn__icon"><i class="icon-front-car"></i></span>
+                                    <span>L'App Mobile</span>
+                                </a>
+                                <div class="main-header__btn__border"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header><!-- /.main-header -->
+
+        <section class="main-slider-one" id="home">
+            <div class="main-slider-one__carousel cityride-owl__carousel cityride-owl__carousel--basic-nav owl-carousel"
+                data-owl-options='{
+            "loop": true,
+            "animateIn": "fadeIn",
+            "animateOut": "fadeOut",
+            "items": 1,
+            "autoplay": true,
+            "smartSpeed": 1500,
+            "nav": false,
+            "dots": true,
+            "margin": 0
+	    }'>
+                <div class="item">
+                    <div class="main-slider-one__item">
+                        <div class="main-slider-one__bg parallax-shape"
+                            style="background-image: url(assets/images/why-choose-1-1.jpg);"></div>
+                        <div class="glow-orb parallax-shape" style="top: 10%; left: 10%;"></div>
+                        <div class="glow-orb parallax-shape"
+                            style="bottom: 10%; right: 20%; background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);">
+                        </div>
+                        <div class="shape-square parallax-shape"></div>
+
+                        <div class="container">
+                            <div class="row gutter-y-50 align-items-center">
+                                <div class="col-lg-7">
+                                    <div class="main-slider-one__content wow fadeInLeft" data-wow-delay="300ms">
+                                        <div class="hero-glass-box">
+                                            <div class="main-slider-one__top">
+                                                <h5 class="main-slider-one__sub-title"
+                                                    style="color: #FED100; font-weight: 700; text-transform: uppercase; letter-spacing: 3px;">
+                                                    Propulsez votre mobilité au Sénégal</h5>
+                                            </div>
+                                            <h2 class="main-slider-one__title">
+                                                Voyagez et envoyez <br>
+                                                <span>vos colis en un clic</span>
+                                            </h2>
+                                            <p class="main-slider-one__text"
+                                                style="color: rgba(255,255,255,0.8); margin-bottom: 30px; font-size: 19px; line-height: 1.6;">
+                                                L'écosystème numérique <strong>"Tout-en-Un"</strong> qui connecte les
+                                                voyageurs et les marchandises à travers tout le Sénégal.
+                                            </p>
+                                            <p
+                                                style="color: #FED100; font-size: 14px; font-weight: 500; margin-top: -10px;">
+                                                <i class="fas fa-info-circle"></i> Une seule application pour simplifier
+                                                vos trajets urbains et interurbains.
+                                            </p>
+                                        </div>
+                                        <div class="main-slider-one__button">
+                                            <a href="#services"
+                                                class="main-slider-one__btn cityride-btn cityride-btn--secondary"
+                                                style="border-radius: 50px; padding: 18px 40px; font-weight: 700;">
+                                                <span>Explorer nos solutions</span>
+                                            </a>
+                                            <a href="#app" class="main-slider-one__btn cityride-btn cityride-btn--white"
+                                                style="border-radius: 50px; padding: 18px 40px; font-weight: 700; margin-left: 20px;">
+                                                <span>Télécharger l'App</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="main-slider-one__image wow zoomIn" data-wow-delay="500ms">
+                                        <div class="image-3d-wrapper"
+                                            style="transform: perspective(1000px) rotateY(-10deg);">
+                                            <img src="assets/images/main-slider-car-1-2.png" alt="Ticketaf Transport"
+                                                class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.main-slider-one -->
+
+        <!-- SERVICES SECTION -->
+        <section class="services-one section-space" id="services">
+            <div class="container">
+                <div class="sec-title sec-title--center wow slideInUp">
+                    <div class="sec-title__top">
+                        <div class="sec-title__shape"></div>
+                        <h6 class="sec-title__tagline">NOS PILIERS</h6>
+                        <div class="sec-title__shape"></div>
+                    </div>
+                    <h3 class="sec-title__title" style="transform: perspective(500px) rotateX(2deg);">Un Écosystème
+                        Numérique Unifié</h3>
+                    <p class="text-muted mt-3">Nous résolvons les problèmes de fragmentation du transport interurbain au
+                        Sénégal.</p>
+                </div>
+                <div class="row gutter-y-30">
+                    <!-- Service 1: Voyageurs -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card wow fadeInUp" data-wow-delay="100ms">
+                            <div class="service-card__image">
+                                <img src="assets/images/service-1-1.jpg" alt="Transport Voyageurs">
+                            </div>
+                            <div class="service-card__middle">
+                                <div class="service-card__icon">
+                                    <div class="service-card__icon__inner"><i class="icon-car-1"></i></div>
+                                    <h3 class="service-card__title">Billetterie Digitale</h3>
+                                </div>
+                            </div>
+                            <div class="service-card__content" style="padding: 20px;">
+                                <p>Fini les attentes aux gares routières. Réservez votre place en bus ou VTC en quelques
+                                    secondes.</p>
+                                <ul class="service-card__bullets">
+                                    <li><i class="fas fa-circle"></i> Réservation instantanée (Mobile Money)</li>
+                                    <li><i class="fas fa-circle"></i> Ticket sécurisé via QR Code</li>
+                                    <li><i class="fas fa-circle"></i> Historique de voyages centralisé</li>
+                                </ul>
+                                <a href="#about" class="service-card__cta">En savoir plus <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Service 2: Colis -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card wow fadeInUp" data-wow-delay="200ms">
+                            <div class="service-card__image">
+                                <img src="assets/images/service-1-2.jpg" alt="Messagerie Colis">
+                            </div>
+                            <div class="service-card__middle">
+                                <div class="service-card__icon">
+                                    <div class="service-card__icon__inner"><i class="icon-car-3"></i></div>
+                                    <h3 class="service-card__title">Messagerie Sécurisée</h3>
+                                </div>
+                            </div>
+                            <div class="service-card__content" style="padding: 20px;">
+                                <p>Un service de colis de "Porte-à-Porte" fiable pour vos envois partout au Sénégal.</p>
+                                <ul class="service-card__bullets">
+                                    <li><i class="fas fa-circle"></i> Collecte directe à votre domicile</li>
+                                    <li><i class="fas fa-circle"></i> Suivi du colis en temps réel</li>
+                                    <li><i class="fas fa-circle"></i> Bordereau numérique infalsifiable</li>
+                                </ul>
+                                <a href="#about" class="service-card__cta">En savoir plus <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Service 3: Logistique -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card wow fadeInUp" data-wow-delay="300ms">
+                            <div class="service-card__image">
+                                <img src="assets/images/service-1-3.jpg" alt="Logistique">
+                            </div>
+                            <div class="service-card__middle">
+                                <div class="service-card__icon">
+                                    <div class="service-card__icon__inner"><i class="icon-car-2"></i></div>
+                                    <h3 class="service-card__title">Dernier Kilomètre</h3>
+                                </div>
+                            </div>
+                            <div class="service-card__content" style="padding: 20px;">
+                                <p>Optimisation du transport de marchandises pour les commerçants et entreprises.</p>
+                                <ul class="service-card__bullets">
+                                    <li><i class="fas fa-circle"></i> Livraison urbaine ultra-rapide</li>
+                                    <li><i class="fas fa-circle"></i> Optimisation des flux interurbains</li>
+                                    <li><i class="fas fa-circle"></i> Suppression des intermédiaires informels</li>
+                                </ul>
+                                <a href="#about" class="service-card__cta">En savoir plus <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SECTION -->
+        <section class="how-it-works section-space" style="background: #fff;">
+            <div class="container">
+                <div class="sec-title sec-title--center wow fadeInUp">
+                    <h6 class="sec-title__tagline">SIMPLICITÉ</h6>
+                    <h3 class="sec-title__title">Comment ça marche ?</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                        <div class="step-card">
+                            <div class="step-card__icon">1</div>
+                            <h4>Téléchargez</h4>
+                            <p>Installez l'app Ticketaf sur Android ou iOS gratuitement.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                        <div class="step-card">
+                            <div class="step-card__icon">2</div>
+                            <h4>Choisissez</h4>
+                            <p>Sélectionnez votre service : Taxi, Bus interurbain ou Envoi de colis.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                        <div class="step-card">
+                            <div class="step-card__icon">3</div>
+                            <h4>Payez</h4>
+                            <p>Validez votre réservation via Mobile Money en un clic.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="400ms">
+                        <div class="step-card">
+                            <div class="step-card__icon">4</div>
+                            <h4>Suivez</h4>
+                            <p>Suivez votre trajet ou votre colis en temps réel sur la carte.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section class="stats-one">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-4 stat-box wow counter-up-trigger">
+                        <h2 class="counter" data-count="10000">+0</h2>
+                        <p>Trajets planifiés</p>
+                    </div>
+                    <div class="col-md-4 stat-box wow counter-up-trigger">
+                        <h2 class="counter" data-count="500">+0</h2>
+                        <p>Chauffeurs partenaires</p>
+                    </div>
+                    <div class="col-md-4 stat-box wow counter-up-trigger">
+                        <h2 class="counter" data-count="98">0%</h2>
+                        <p>Satisfaction utilisateur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISION / ABOUT SECTION -->
+        <section class="about-four section-space" id="about" style="background-color: #f9f9f9;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-four__image wow fadeInLeft">
+                            <img src="assets/images/about-1-1.jpg" alt="Vision Ticketaf"
+                                class="img-fluid rounded shadow premium-tilt">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-four__content wow fadeInRight">
+                            <div class="sec-title">
+                                <div class="sec-title__top">
+                                    <div class="sec-title__shape"></div>
+                                    <h6 class="sec-title__tagline">LA RÉPONSE TICKETAF</h6>
+                                </div>
+                                <h3 class="sec-title__title">Digitaliser la Mobilité, du Car Rapide au Bus Interurbain
+                                </h3>
+                                <p class="mt-2 text-dark" style="font-weight: 600;">Nous réinventons le transport pour
+                                    un Sénégal plus connecté et sécurisé.</p>
+                            </div>
+                            <p class="about-four__text">
+                                Ticketaf n'est pas seulement une application ; c'est un engagement pour la sécurité et
+                                la transparence. Nous supprimons la fragmentation actuelle entre le transport et la
+                                logistique en offrant une plateforme centralisée accessible à tous.
+                            </p>
+
+                            <!-- Before/With comparison -->
+                            <div class="row mt-4 gutter-y-20">
+                                <div class="col-md-6">
+                                    <div class="comparison-card">
+                                        <h5 class="text-danger mb-3"><i class="fas fa-times-circle"></i> Avant Ticketaf
+                                        </h5>
+                                        <ul class="list-unstyled small">
+                                            <li class="mb-2">● Attentes interminables au garage</li>
+                                            <li class="mb-2">● Tarifs fluctuants et informels</li>
+                                            <li class="mb-2">● Colis perdus sans aucun suivi</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="comparison-card comparison-card--dark">
+                                        <h5 style="color: var(--ticketaf-yellow);" class="mb-3"><i
+                                                class="fas fa-check-circle"></i> Avec Ticketaf</h5>
+                                        <ul class="list-unstyled small">
+                                            <li class="mb-2">● Réservation immédiate d'avance</li>
+                                            <li class="mb-2">● Prix fixes et transparence mobile</li>
+                                            <li class="mb-2">● Traçabilité GPS de bout en bout</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="about-four__btn-box mt-5">
+                                <a href="https://wa.me/221781550404" class="cityride-btn cityride-btn--secondary"
+                                    style="border-radius: 50px;">
+                                    <span>Rejoindre l'aventure</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTNER SECTION -->
+        <section class="partner-section section-space">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 wow fadeInLeft">
+                        <div class="sec-title">
+                            <h6 class="sec-title__tagline"
+                                style="background: rgba(255,255,255,0.1); color: #fff !important;">CHAUFFEURS & FLOTTES
+                            </h6>
+                            <h3 class="sec-title__title text-white">Devenez Partenaire Ticketaf</h3>
+                            <p class="text-white-50 mt-3">Augmentez vos revenus, formalisez votre activité et profitez
+                                d'un flux constant de clients sans effort de prospection.</p>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fas fa-calendar-alt text-warning"></i>
+                                    <span class="text-white small">Planning libre</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fas fa-wallet text-warning"></i>
+                                    <span class="text-white small">Revenus garantis</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="fas fa-chart-line text-warning"></i>
+                                    <span class="text-white small">Gestion simplifiée</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/221781550404" class="cityride-btn cityride-btn--secondary mt-4"
+                            style="border-radius: 50px;">
+                            <span>Postuler comme partenaire</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-5 text-center wow fadeInRight">
+                        <div class="hero-glass-box" style="margin-bottom: 0;">
+                            <h4 class="text-white mb-3">Déjà +500 chauffeurs</h4>
+                            <p class="text-white-50 small">Rejoignez le réseau leader de la transition numérique du
+                                transport au Sénégal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APP PROMO SECTION -->
+        <section class="mobile-app-section section-space" id="app">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 wow fadeInLeft">
+                        <div class="sec-title">
+                            <h3 class="sec-title__title">L'Innovation dans votre poche</h3>
+                            <p>Disponible 24h/24 et 7j/7, Ticketaf simplifie vos échanges intérieurs. Recherchez
+                                "Ticketaf" sur vos stores habituels.</p>
+                        </div>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="fas fa-check text-warning mr-2"></i> Interface ultra-simple et en
+                                français</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning mr-2"></i> Support client via WhatsApp
+                                intégré</li>
+                            <li class="mb-2"><i class="fas fa-check text-warning mr-2"></i> Gain de temps et d'énergie
+                                quotidien</li>
+                        </ul>
+                        <div class="app-buttons d-flex gap-3">
+                            <a href="#" class="cityride-btn cityride-btn--secondary" style="border-radius: 50px;">
+                                <i class="fab fa-google-play"></i> <span>Google Play</span>
+                            </a>
+                            <a href="#" class="cityride-btn cityride-btn--secondary"
+                                style="border-radius: 50px; opacity: 0.7;">
+                                <i class="fab fa-apple"></i> <span>Bientôt sur App Store</span>
+                            </a>
+                        </div>
+                        <div class="support-info mt-4">
+                            <p><strong>Besoin d'aide ?</strong> <br> WhatsApp : +221 78 155 04 04</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center wow fadeInRight">
+                        <img src="assets/images/download-app-taxi-mockup-3-1.png" alt="Ticketaf App" class="img-fluid"
+                            style="max-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- FOOTER -->
+        <footer class="main-footer" id="contact">
+            <div class="main-footer__inner">
+                <div class="main-footer__top">
+                    <div class="container">
+                        <div class="row gutter-y-40">
+                            <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1500ms"
+                                data-wow-delay="150ms">
+                                <div class="footer-widget footer-widget--about">
+                                    <div class="footer-widget__logo">
+                                        <a href="#home"><img src="assets/images/logo-ticketaf.png" alt="Ticketaf"
+                                                width="150"></a>
+                                    </div>
+                                    <p class="footer-widget__text">Ticketaf simplifie vos déplacements et livraisons.
+                                        Une seule application pour taxi, bus et colis.</p>
+                                    <div class="footer-widget__social">
+                                        <a href="https://facebook.com"> <i class="fab fa-facebook-f"
+                                                aria-hidden="true"></i> <span class="sr-only">Facebook</span> </a>
+                                        <a href="https://twitter.com"> <i class="fab fa-twitter" aria-hidden="true"></i>
+                                            <span class="sr-only">Twitter</span> </a>
+                                        <a href="https://instagram.com"> <i class="fab fa-instagram"
+                                                aria-hidden="true"></i> <span class="sr-only">Instagram</span> </a>
+                                        <a href="https://youtube.com"> <i class="fab fa-youtube" aria-hidden="true"></i>
+                                            <span class="sr-only">Youtube</span> </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-3 col-md-6 wow fadeInUp" data-wow-duration="1500ms"
+                                data-wow-delay="200ms">
+                                <div class="footer-widget">
+                                    <h2 class="footer-widget__title">Liens rapides</h2>
+                                    <ul class="list-unstyled footer-widget__link">
+                                        <li><a href="#home">Accueil</a></li>
+                                        <li><a href="#about">Notre Vision</a></li>
+                                        <li><a href="#services">Services</a></li>
+                                        <li><a href="#app">Télécharger</a></li>
+                                        <li><a href="#contact">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1500ms"
+                                data-wow-delay="300ms">
+                                <div class="footer-widget footer-widget--contact">
+                                    <h2 class="footer-widget__title">Nous contacter</h2>
+                                    <ul class="list-unstyled footer-widget__info">
+                                        <li>
+                                            <span class="footer-widget__info__icon">
+                                                <i class="icon-email"></i>
+                                            </span>
+                                            <a href="mailto:support@ticketaf.com">support@ticketaf.com</a>
+                                        </li>
+                                        <li>
+                                            <span class="footer-widget__info__icon">
+                                                <i class="icon-telephone-call"></i>
+                                            </span>
+                                            <a href="tel:+221781550404">+221 78 155 04 04</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-footer__bottom">
+                    <div class="container">
+                        <div class="main-footer__bottom__inner">
+                            <p class="main-footer__copyright">© Tous droits réservés 2026 - Ticketaf</p>
+                            <ul class="list-unstyled main-footer__bottom__list">
+                                <li><a href="#">Conditions d'utilisation</a></li>
+                                <li><a href="#">Politique de confidentialité</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer><!-- /.main-footer -->
+
+    </div><!-- /.page-wrapper -->
+
+    <!-- MOBILE NAVIGATION -->
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="icon-x"></i></span>
+            <div class="logo-box logo-retina">
+                <a href="#home" aria-label="Ticketaf logo"><img src="assets/images/logo-ticketaf.png" width="150"
+                        alt="Ticketaf"></a>
+            </div>
+            <nav class="mobile-nav__container">
+                <ul class="mobile-nav__list">
+                    <li><a href="#home">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">Notre Vision</a></li>
+                    <li><a href="#app">Télécharger</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <span class="mobile-nav__contact__icon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <a href="mailto:support@ticketaf.com">support@ticketaf.com</a>
+                </li>
+                <li>
+                    <span class="mobile-nav__contact__icon">
+                        <i class="fa fa-phone-alt"></i>
+                    </span>
+                    <a href="tel:+221781550404">+221 78 155 04 04</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href="https://facebook.com"> <i class="fab fa-facebook-f" aria-hidden="true"></i> <span
+                        class="sr-only">Facebook</span> </a>
+                <a href="https://twitter.com"> <i class="fab fa-twitter" aria-hidden="true"></i> <span
+                        class="sr-only">Twitter</span> </a>
+                <a href="https://instagram.com"> <i class="fab fa-instagram" aria-hidden="true"></i> <span
+                        class="sr-only">Instagram</span> </a>
+                <a href="https://youtube.com"> <i class="fab fa-youtube" aria-hidden="true"></i> <span
+                        class="sr-only">Youtube</span> </a>
+            </div>
+        </div>
+    </div><!-- /.mobile-nav__wrapper -->
+
+    <!-- SEARCH POPUP -->
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <div class="search-popup__content">
+            <form role="search" method="get" class="search-popup__form" action="#">
+                <input type="text" id="search" placeholder="Rechercher...">
+                <button type="submit" aria-label="search submit" class="cityride-btn"><i
+                        class="icon-search"></i></button>
+            </form>
+        </div>
+    </div><!-- /.search-popup -->
+
+    <!-- SCROLL TO TOP -->
+    <div id="scroll-top" class="scroll-top">
+        <span id="scroll-top-value" class="scroll-top-value"></span>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/vendors/jquery/jquery-3.7.0.min.js"></script>
+    <script src="assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+    <script src="assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="assets/vendors/wow/wow.js"></script>
+    <script src="assets/vendors/countdown/countdown.min.js"></script>
+
+    <!-- template js -->
+    <script src="assets/js/cityride.js"></script>
+
+    <!-- CUSTOM INTERACTIVE SCRIPTS -->
+    <script>
+        $(document).ready(function () {
+            // Smooth Scroll for menu anchors
+            $('a[href^="#"]').on('click', function (event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 80
+                    }, 800);
+                }
+            });
+
+            // Parallax movement on hero shapes
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                $('.parallax-shape').css({
+                    'transform': 'translateY(' + (scroll * 0.2) + 'px)'
+                });
+            });
+
+            // Stats Count-up logic using jquery.appear
+            // Stats Count-up logic using IntersectionObserver (More reliable than old plugins)
+            const countOptions = { threshold: 0.5 };
+            const countObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const $this = $(entry.target);
+                        if (!$this.hasClass('counted')) {
+                            $this.addClass('counted');
+                            const countTo = parseInt($this.attr('data-count'));
+                            const isPercent = entry.target.innerText.indexOf('%') !== -1;
+
+                            $({ countNum: 0 }).animate({
+                                countNum: countTo
+                            }, {
+                                duration: 2500,
+                                easing: 'swing',
+                                step: function () {
+                                    if (isPercent) {
+                                        $this.text(Math.floor(this.countNum) + "%");
+                                    } else {
+                                        $this.text("+" + Math.floor(this.countNum).toLocaleString());
+                                    }
+                                },
+                                complete: function () {
+                                    if (isPercent) {
+                                        $this.text(this.countNum + "%");
+                                    } else {
+                                        $this.text("+" + this.countNum.toLocaleString());
+                                    }
+                                }
+                            });
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, countOptions);
+
+            $('.counter').each(function () {
+                countObserver.observe(this);
+            });
+        });
+    </script>
+</body>
+
+</html>
